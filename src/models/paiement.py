@@ -1,28 +1,27 @@
-"""Modèle métier : Paiement."""
+"""Modele metier : Paiement."""
 from dataclasses import dataclass
 from typing import Optional
 
 
 @dataclass
 class Paiement:
-    """Représente un versement effectué par un élève."""
     id: Optional[int] = None
     eleve_id: int = 0
     recu_id: int = 0
     montant: float = 0.0
     date_paiement: str = ""
-    mode_paiement: str = "Espèces"
+    mode_paiement: str = "Especes"
     reference: Optional[str] = None
     observation: Optional[str] = None
     date_creation: Optional[str] = None
 
-    # Champs joints (remplis par le repository)
     numero_recu: Optional[str] = None
     eleve_nom: Optional[str] = None
     eleve_prenom: Optional[str] = None
+    solde_apres: float = 0.0
 
     @classmethod
-    def from_row(cls, row) -> "Paiement":
+    def from_row(cls, row):
         keys = row.keys()
         return cls(
             id=row["id"],
@@ -37,4 +36,5 @@ class Paiement:
             numero_recu=row["numero_recu"] if "numero_recu" in keys else None,
             eleve_nom=row["eleve_nom"] if "eleve_nom" in keys else None,
             eleve_prenom=row["eleve_prenom"] if "eleve_prenom" in keys else None,
+            solde_apres=row["solde_apres"] if "solde_apres" in keys else 0.0,
         )

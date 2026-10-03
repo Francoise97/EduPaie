@@ -1,4 +1,4 @@
-"""Ecran liste des eleves avec recherche et filtres."""
+"""Ecran liste des eleves."""
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
     QPushButton, QComboBox, QTableWidget, QTableWidgetItem,
@@ -14,8 +14,6 @@ from src.ui.dialogs.paiement_dialog import PaiementDialog
 
 
 class ElevesWidget(QWidget):
-    """Ecran listant tous les eleves."""
-
     eleve_selectionne = Signal(int)
     donnees_modifiees = Signal()
 
@@ -44,7 +42,7 @@ class ElevesWidget(QWidget):
         filtres = QHBoxLayout()
 
         self.recherche = QLineEdit()
-        self.recherche.setPlaceholderText("Rechercher un eleve (nom, prenom, classe)...")
+        self.recherche.setPlaceholderText("Rechercher un eleve...")
         self.recherche.setObjectName("SearchBar")
         filtres.addWidget(self.recherche, 1)
 
@@ -87,12 +85,15 @@ class ElevesWidget(QWidget):
         actions = QHBoxLayout()
         actions.addStretch()
 
-        self.btn_fiche = QPushButton("Voir la fiche")
+        self.btn_fiche = QPushButton("Voir la fiche et historique")
         self.btn_fiche.setObjectName("Secondary")
+
         self.btn_paiement = QPushButton("Enregistrer un paiement")
         self.btn_paiement.setObjectName("Success")
+
         self.btn_modifier = QPushButton("Modifier")
         self.btn_modifier.setObjectName("Secondary")
+
         self.btn_supprimer = QPushButton("Supprimer")
         self.btn_supprimer.setObjectName("Danger")
 
@@ -110,7 +111,7 @@ class ElevesWidget(QWidget):
         self.btn_supprimer.clicked.connect(self._supprimer_eleve)
         self.btn_fiche.clicked.connect(self._voir_fiche)
         self.btn_paiement.clicked.connect(self._enregistrer_paiement)
-        self.table.doubleClicked.connect(self._voir_fiche)
+        self.table.doubleClicked.connect(lambda _idx: self._voir_fiche())
 
     def rafraichir(self):
         terme = self.recherche.text().strip()
@@ -160,7 +161,10 @@ class ElevesWidget(QWidget):
         row = self.table.currentRow()
         if row < 0:
             return None
-        return int(self.table.item(row, 0).text())
+        item = self.table.item(row, 0)
+        if not item:
+            return None
+        return int(item.text())
 
     def _nouvel_eleve(self):
         dialog = EleveDialog(self)
