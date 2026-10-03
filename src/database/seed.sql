@@ -1,0 +1,16 @@
+INSERT INTO eleve (nom, prenom, classe, annee_scolaire, frais_totaux, telephone, nom_parent) VALUES
+('Diallo',  'Amadou',    '6ème A', '2024-2025', 250000, '+221 77 111 11 11', 'M. Diallo Ibrahima'),
+('Sow',     'Fatou',     '5ème B', '2024-2025', 300000, '+221 77 222 22 22', 'Mme Sow Aïda'),
+('Ba',      'Ousmane',   '4ème A', '2024-2025', 200000, '+221 77 333 33 33', 'M. Ba Mamadou'),
+('Ndiaye',  'Aïssatou',  '6ème A', '2024-2025', 250000, '+221 77 444 44 44', 'Mme Ndiaye Rokhaya'),
+('Fall',    'Ibrahima',  '5ème B', '2024-2025', 300000, '+221 77 555 55 55', 'M. Fall Cheikh'),
+('Diop',    'Mariama',   '4ème A', '2024-2025', 200000, '+221 77 666 66 66', 'Mme Diop Aminata'),
+('Sarr',    'Cheikh',    '3ème A', '2024-2025', 350000, '+221 77 777 77 77', 'M. Sarr Oumar'),
+('Gueye',   'Ndèye',     '6ème A', '2024-2025', 250000, '+221 77 888 88 88', 'Mme Gueye Coumba'),
+('Mbaye',   'Moussa',    '5ème B', '2024-2025', 300000, '+221 77 999 99 99', 'M. Mbaye Alioune'),
+('Faye',    'Khady',     '4ème A', '2024-2025', 200000, '+221 77 101 01 01', 'Mme Faye Bineta'),
+('Cissé',   'Abdoulaye', '3ème A', '2024-2025', 350000, '+221 77 121 21 21', 'M. Cissé Modou'),
+('Thiam',   'Rokhaya',   '6ème A', '2024-2025', 250000, '+221 77 131 31 31', 'Mme Thiam Adja'),
+('Kane',    'Mamadou',   '5ème B', '2024-2025', 300000, '+221 77 141 41 41', 'M. Kane Souleymane'),
+('Sylla',   'Awa',       '4ème A', '2024-2025', 200000, '+221 77 151 51 51', 'Mme Sylla Fatima'),
+('Camara',  'Sekou',     '3ème A', '2024-2025', 350000, '+221 77 161 61 61', 'M. Camara Lamine');
