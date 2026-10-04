@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+
+# Base de donnees locale
+data/*.db-journal
+
+# IDE
+.vscode/
+.idea/
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Recus PDF generes
+recus/
+
+# OS
+.DS_Store
+Thumbs.db
