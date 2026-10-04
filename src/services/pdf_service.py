@@ -1,4 +1,5 @@
 """Service de generation PDF des recus."""
+import sys
 from datetime import datetime
 from pathlib import Path
 from reportlab.lib.pagesizes import A5
@@ -11,8 +12,11 @@ from src.services.paiement_service import PaiementService
 from src.services.recu_service import RecuService
 
 
-ROOT_DIR = Path(__file__).resolve().parents[2]
-RECUS_DIR = ROOT_DIR / "recus"
+# Dossier des PDF : a cote de l'exe ou du projet
+if hasattr(sys, "_MEIPASS"):
+    RECUS_DIR = Path(sys.executable).parent / "recus"
+else:
+    RECUS_DIR = Path(__file__).resolve().parents[2] / "recus"
 
 
 class PDFService:
@@ -55,7 +59,6 @@ class PDFService:
         largeur, hauteur = A5
         marge = 15 * mm
 
-        # En-tete bleu
         c.setFillColor(colors.HexColor("#1E3A8A"))
         c.rect(0, hauteur - 25 * mm, largeur, 25 * mm, fill=1, stroke=0)
 
@@ -66,7 +69,6 @@ class PDFService:
         c.setFont("Helvetica", 8)
         c.drawCentredString(largeur / 2, hauteur - 18 * mm, self.ECOLE_ADRESSE)
 
-        # Titre
         c.setFillColor(colors.HexColor("#1E3A8A"))
         c.setFont("Helvetica-Bold", 16)
         c.drawCentredString(largeur / 2, hauteur - 38 * mm, "RECU DE PAIEMENT")
@@ -75,12 +77,10 @@ class PDFService:
         c.setFillColor(colors.HexColor("#EF4444"))
         c.drawCentredString(largeur / 2, hauteur - 46 * mm, "N " + recu.numero_unique)
 
-        # Ligne
         c.setStrokeColor(colors.HexColor("#CBD5E1"))
         c.setLineWidth(0.5)
         c.line(marge, hauteur - 52 * mm, largeur - marge, hauteur - 52 * mm)
 
-        # Infos eleve
         y = hauteur - 60 * mm
         c.setFillColor(colors.HexColor("#1E293B"))
 
@@ -101,7 +101,6 @@ class PDFService:
         c.line(marge, y, largeur - marge, y)
         y -= 8 * mm
 
-        # Montant paye
         c.setFont("Helvetica-Bold", 10)
         c.setFillColor(colors.HexColor("#1E293B"))
         c.drawString(marge, y, "Montant paye :")
@@ -110,7 +109,6 @@ class PDFService:
         c.drawString(marge + 35 * mm, y, self._fmt(recu.montant_paye))
         y -= 8 * mm
 
-        # Details
         c.setFillColor(colors.HexColor("#1E293B"))
         details = [
             ("Mode de paiement :", paiement.mode_paiement if paiement else "-"),
@@ -128,7 +126,6 @@ class PDFService:
             c.drawString(marge + 35 * mm, y, str(valeur))
             y -= 5 * mm
 
-        # Situation financiere (encadre gris)
         y -= 4 * mm
         c.setFillColor(colors.HexColor("#F1F5F9"))
         c.rect(marge, y - 20 * mm, largeur - 2 * marge, 20 * mm, fill=1, stroke=0)
@@ -153,7 +150,6 @@ class PDFService:
         c.setFillColor(colors.HexColor("#EF4444"))
         c.drawString(marge + 30 * mm, y, self._fmt(recu.solde_apres))
 
-        # Signatures
         y_sig = 30 * mm
         c.setStrokeColor(colors.HexColor("#94A3B8"))
         c.setFillColor(colors.HexColor("#1E293B"))
@@ -165,7 +161,6 @@ class PDFService:
         c.line(largeur - marge - 50 * mm, y_sig, largeur - marge, y_sig)
         c.drawString(largeur - marge - 45 * mm, y_sig - 5 * mm, "L'Etablissement")
 
-        # Pied
         c.setFont("Helvetica-Oblique", 7)
         c.setFillColor(colors.HexColor("#94A3B8"))
         c.drawCentredString(

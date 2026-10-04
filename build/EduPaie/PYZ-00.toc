@@ -1,0 +1,647 @@
+('C:\\Users\\ADN GOLFE1\\EduPaie\\build\\EduPaie\\PYZ-00.pyz',
+ [('PySide6',
+   'C:\\Users\\ADN '
+   'GOLFE1\\EduPaie\\venv\\Lib\\site-packages\\PySide6\\__init__.py',
+   'PYMODULE'),
+  ('PySide6.support',
+   'C:\\Users\\ADN '
+   'GOLFE1\\EduPaie\\venv\\Lib\\site-packages\\PySide6\\support\\__init__.py',
+   'PYMODULE'),
+  ('PySide6.support.deprecated',
+   'C:\\Users\\ADN '
+   'GOLFE1\\EduPaie\\venv\\Lib\\site-packages\\PySide6\\support\\deprecated.py',
+   'PYMODULE'),
+  ('__future__',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\__future__.py',
+   'PYMODULE'),
+  ('_ast_unparse',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_ast_unparse.py',
+   'PYMODULE'),
+  ('_colorize',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_colorize.py',
+   'PYMODULE'),
+  ('_compat_pickle',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_compat_pickle.py',
+   'PYMODULE'),
+  ('_opcode_metadata',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_opcode_metadata.py',
+   'PYMODULE'),
+  ('_py_abc',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_py_abc.py',
+   'PYMODULE'),
+  ('_py_warnings',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_py_warnings.py',
+   'PYMODULE'),
+  ('_pydatetime',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_pydatetime.py',
+   'PYMODULE'),
+  ('_pydecimal',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_pydecimal.py',
+   'PYMODULE'),
+  ('_pyi_rth_utils',
+   'C:\\Users\\ADN '
+   'GOLFE1\\EduPaie\\venv\\Lib\\site-packages\\PyInstaller\\fake-modules\\_pyi_rth_utils\\__init__.py',
+   'PYMODULE'),
+  ('_pyi_rth_utils.qt',
+   'C:\\Users\\ADN '
+   'GOLFE1\\EduPaie\\venv\\Lib\\site-packages\\PyInstaller\\fake-modules\\_pyi_rth_utils\\qt.py',
+   'PYMODULE'),
+  ('_strptime',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_strptime.py',
+   'PYMODULE'),
+  ('_threading_local',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\_threading_local.py',
+   'PYMODULE'),
+  ('annotationlib',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\annotationlib.py',
+   'PYMODULE'),
+  ('argparse',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\argparse.py',
+   'PYMODULE'),
+  ('ast',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\ast.py',
+   'PYMODULE'),
+  ('base64',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\base64.py',
+   'PYMODULE'),
+  ('bisect',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\bisect.py',
+   'PYMODULE'),
+  ('bz2',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\bz2.py',
+   'PYMODULE'),
+  ('calendar',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\calendar.py',
+   'PYMODULE'),
+  ('code',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\code.py',
+   'PYMODULE'),
+  ('codeop',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\codeop.py',
+   'PYMODULE'),
+  ('compression',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\compression\\__init__.py',
+   'PYMODULE'),
+  ('compression._common',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\compression\\_common\\__init__.py',
+   'PYMODULE'),
+  ('compression._common._streams',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\compression\\_common\\_streams.py',
+   'PYMODULE'),
+  ('compression.zstd',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\compression\\zstd\\__init__.py',
+   'PYMODULE'),
+  ('compression.zstd._zstdfile',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\compression\\zstd\\_zstdfile.py',
+   'PYMODULE'),
+  ('contextlib',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\contextlib.py',
+   'PYMODULE'),
+  ('contextvars',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\contextvars.py',
+   'PYMODULE'),
+  ('copy',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\copy.py',
+   'PYMODULE'),
+  ('csv',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\csv.py',
+   'PYMODULE'),
+  ('dataclasses',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\dataclasses.py',
+   'PYMODULE'),
+  ('datetime',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\datetime.py',
+   'PYMODULE'),
+  ('decimal',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\decimal.py',
+   'PYMODULE'),
+  ('difflib',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\difflib.py',
+   'PYMODULE'),
+  ('dis',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\dis.py',
+   'PYMODULE'),
+  ('email',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\__init__.py',
+   'PYMODULE'),
+  ('email._encoded_words',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\_encoded_words.py',
+   'PYMODULE'),
+  ('email._header_value_parser',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\_header_value_parser.py',
+   'PYMODULE'),
+  ('email._parseaddr',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\_parseaddr.py',
+   'PYMODULE'),
+  ('email._policybase',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\_policybase.py',
+   'PYMODULE'),
+  ('email.base64mime',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\base64mime.py',
+   'PYMODULE'),
+  ('email.charset',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\charset.py',
+   'PYMODULE'),
+  ('email.contentmanager',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\contentmanager.py',
+   'PYMODULE'),
+  ('email.encoders',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\encoders.py',
+   'PYMODULE'),
+  ('email.errors',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\errors.py',
+   'PYMODULE'),
+  ('email.feedparser',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\feedparser.py',
+   'PYMODULE'),
+  ('email.generator',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\generator.py',
+   'PYMODULE'),
+  ('email.header',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\header.py',
+   'PYMODULE'),
+  ('email.headerregistry',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\headerregistry.py',
+   'PYMODULE'),
+  ('email.iterators',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\iterators.py',
+   'PYMODULE'),
+  ('email.message',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\message.py',
+   'PYMODULE'),
+  ('email.parser',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\parser.py',
+   'PYMODULE'),
+  ('email.policy',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\policy.py',
+   'PYMODULE'),
+  ('email.quoprimime',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\quoprimime.py',
+   'PYMODULE'),
+  ('email.utils',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\email\\utils.py',
+   'PYMODULE'),
+  ('fnmatch',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\fnmatch.py',
+   'PYMODULE'),
+  ('fractions',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\fractions.py',
+   'PYMODULE'),
+  ('ftplib',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\ftplib.py',
+   'PYMODULE'),
+  ('getopt',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\getopt.py',
+   'PYMODULE'),
+  ('gettext',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\gettext.py',
+   'PYMODULE'),
+  ('glob',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\glob.py',
+   'PYMODULE'),
+  ('gzip',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\gzip.py',
+   'PYMODULE'),
+  ('hashlib',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\hashlib.py',
+   'PYMODULE'),
+  ('http',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\http\\__init__.py',
+   'PYMODULE'),
+  ('http.client',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\http\\client.py',
+   'PYMODULE'),
+  ('http.cookiejar',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\http\\cookiejar.py',
+   'PYMODULE'),
+  ('importlib',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\__init__.py',
+   'PYMODULE'),
+  ('importlib._abc',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\_abc.py',
+   'PYMODULE'),
+  ('importlib._bootstrap',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\_bootstrap.py',
+   'PYMODULE'),
+  ('importlib._bootstrap_external',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\_bootstrap_external.py',
+   'PYMODULE'),
+  ('importlib.abc',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\abc.py',
+   'PYMODULE'),
+  ('importlib.machinery',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\machinery.py',
+   'PYMODULE'),
+  ('importlib.metadata',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\metadata\\__init__.py',
+   'PYMODULE'),
+  ('importlib.metadata._adapters',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\metadata\\_adapters.py',
+   'PYMODULE'),
+  ('importlib.metadata._collections',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\metadata\\_collections.py',
+   'PYMODULE'),
+  ('importlib.metadata._functools',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\metadata\\_functools.py',
+   'PYMODULE'),
+  ('importlib.metadata._itertools',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\metadata\\_itertools.py',
+   'PYMODULE'),
+  ('importlib.metadata._meta',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\metadata\\_meta.py',
+   'PYMODULE'),
+  ('importlib.metadata._text',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\metadata\\_text.py',
+   'PYMODULE'),
+  ('importlib.readers',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\readers.py',
+   'PYMODULE'),
+  ('importlib.resources',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\resources\\__init__.py',
+   'PYMODULE'),
+  ('importlib.resources._adapters',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\resources\\_adapters.py',
+   'PYMODULE'),
+  ('importlib.resources._common',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\resources\\_common.py',
+   'PYMODULE'),
+  ('importlib.resources._functional',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\resources\\_functional.py',
+   'PYMODULE'),
+  ('importlib.resources._itertools',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\resources\\_itertools.py',
+   'PYMODULE'),
+  ('importlib.resources.abc',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\resources\\abc.py',
+   'PYMODULE'),
+  ('importlib.resources.readers',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\resources\\readers.py',
+   'PYMODULE'),
+  ('importlib.util',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\importlib\\util.py',
+   'PYMODULE'),
+  ('inspect',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\inspect.py',
+   'PYMODULE'),
+  ('ipaddress',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\ipaddress.py',
+   'PYMODULE'),
+  ('json',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\json\\__init__.py',
+   'PYMODULE'),
+  ('json.decoder',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\json\\decoder.py',
+   'PYMODULE'),
+  ('json.encoder',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\json\\encoder.py',
+   'PYMODULE'),
+  ('json.scanner',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\json\\scanner.py',
+   'PYMODULE'),
+  ('logging',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\logging\\__init__.py',
+   'PYMODULE'),
+  ('lzma',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\lzma.py',
+   'PYMODULE'),
+  ('mimetypes',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\mimetypes.py',
+   'PYMODULE'),
+  ('netrc',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\netrc.py',
+   'PYMODULE'),
+  ('numbers',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\numbers.py',
+   'PYMODULE'),
+  ('opcode',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\opcode.py',
+   'PYMODULE'),
+  ('pathlib',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\pathlib\\__init__.py',
+   'PYMODULE'),
+  ('pathlib._os',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\pathlib\\_os.py',
+   'PYMODULE'),
+  ('pickle',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\pickle.py',
+   'PYMODULE'),
+  ('pprint',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\pprint.py',
+   'PYMODULE'),
+  ('py_compile',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\py_compile.py',
+   'PYMODULE'),
+  ('quopri',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\quopri.py',
+   'PYMODULE'),
+  ('random',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\random.py',
+   'PYMODULE'),
+  ('selectors',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\selectors.py',
+   'PYMODULE'),
+  ('shiboken6',
+   'C:\\Users\\ADN '
+   'GOLFE1\\EduPaie\\venv\\Lib\\site-packages\\shiboken6\\__init__.py',
+   'PYMODULE'),
+  ('shutil',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\shutil.py',
+   'PYMODULE'),
+  ('signal',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\signal.py',
+   'PYMODULE'),
+  ('socket',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\socket.py',
+   'PYMODULE'),
+  ('sqlite3',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\sqlite3\\__init__.py',
+   'PYMODULE'),
+  ('sqlite3.__main__',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\sqlite3\\__main__.py',
+   'PYMODULE'),
+  ('sqlite3.dbapi2',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\sqlite3\\dbapi2.py',
+   'PYMODULE'),
+  ('sqlite3.dump',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\sqlite3\\dump.py',
+   'PYMODULE'),
+  ('src', 'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\__init__.py', 'PYMODULE'),
+  ('src.database',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\database\\__init__.py',
+   'PYMODULE'),
+  ('src.database.db_manager',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\database\\db_manager.py',
+   'PYMODULE'),
+  ('src.models',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\models\\__init__.py',
+   'PYMODULE'),
+  ('src.models.eleve',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\models\\eleve.py',
+   'PYMODULE'),
+  ('src.models.paiement',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\models\\paiement.py',
+   'PYMODULE'),
+  ('src.models.recu',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\models\\recu.py',
+   'PYMODULE'),
+  ('src.repositories',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\repositories\\__init__.py',
+   'PYMODULE'),
+  ('src.repositories.eleve_repository',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\repositories\\eleve_repository.py',
+   'PYMODULE'),
+  ('src.repositories.paiement_repository',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\repositories\\paiement_repository.py',
+   'PYMODULE'),
+  ('src.repositories.recu_repository',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\repositories\\recu_repository.py',
+   'PYMODULE'),
+  ('src.services',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\services\\__init__.py',
+   'PYMODULE'),
+  ('src.services.eleve_service',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\services\\eleve_service.py',
+   'PYMODULE'),
+  ('src.services.paiement_service',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\services\\paiement_service.py',
+   'PYMODULE'),
+  ('src.services.recu_service',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\services\\recu_service.py',
+   'PYMODULE'),
+  ('src.ui',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.dialogs',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\dialogs\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.dialogs.eleve_dialog',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\dialogs\\eleve_dialog.py',
+   'PYMODULE'),
+  ('src.ui.dialogs.paiement_dialog',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\dialogs\\paiement_dialog.py',
+   'PYMODULE'),
+  ('src.ui.main_window',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\main_window.py',
+   'PYMODULE'),
+  ('src.ui.widgets',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\widgets\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.widgets.dashboard_widget',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\widgets\\dashboard_widget.py',
+   'PYMODULE'),
+  ('src.ui.widgets.eleves_widget',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\widgets\\eleves_widget.py',
+   'PYMODULE'),
+  ('src.ui.widgets.fiche_eleve_widget',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\widgets\\fiche_eleve_widget.py',
+   'PYMODULE'),
+  ('src.ui.widgets.paiements_widget',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\ui\\widgets\\paiements_widget.py',
+   'PYMODULE'),
+  ('src.utils',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\utils\\__init__.py',
+   'PYMODULE'),
+  ('src.utils.formatters',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\utils\\formatters.py',
+   'PYMODULE'),
+  ('src.utils.validators',
+   'C:\\Users\\ADN GOLFE1\\EduPaie\\src\\utils\\validators.py',
+   'PYMODULE'),
+  ('ssl',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\ssl.py',
+   'PYMODULE'),
+  ('statistics',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\statistics.py',
+   'PYMODULE'),
+  ('string',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\string\\__init__.py',
+   'PYMODULE'),
+  ('stringprep',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\stringprep.py',
+   'PYMODULE'),
+  ('subprocess',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\subprocess.py',
+   'PYMODULE'),
+  ('tarfile',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\tarfile.py',
+   'PYMODULE'),
+  ('tempfile',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\tempfile.py',
+   'PYMODULE'),
+  ('textwrap',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\textwrap.py',
+   'PYMODULE'),
+  ('threading',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\threading.py',
+   'PYMODULE'),
+  ('token',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\token.py',
+   'PYMODULE'),
+  ('tokenize',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\tokenize.py',
+   'PYMODULE'),
+  ('tracemalloc',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\tracemalloc.py',
+   'PYMODULE'),
+  ('typing',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\typing.py',
+   'PYMODULE'),
+  ('urllib',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\urllib\\__init__.py',
+   'PYMODULE'),
+  ('urllib.error',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\urllib\\error.py',
+   'PYMODULE'),
+  ('urllib.parse',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\urllib\\parse.py',
+   'PYMODULE'),
+  ('urllib.request',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\urllib\\request.py',
+   'PYMODULE'),
+  ('urllib.response',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\urllib\\response.py',
+   'PYMODULE'),
+  ('zipfile',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\zipfile\\__init__.py',
+   'PYMODULE'),
+  ('zipfile._path',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\zipfile\\_path\\__init__.py',
+   'PYMODULE'),
+  ('zipfile._path.glob',
+   'C:\\Users\\ADN '
+   'GOLFE1\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\zipfile\\_path\\glob.py',
+   'PYMODULE')])

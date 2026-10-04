@@ -1,8 +1,8 @@
-"""Fenêtre principale de l'application."""
+"""Fenetre principale."""
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QHBoxLayout, QVBoxLayout,
     QPushButton, QLabel, QStackedWidget, QFrame,
-    QStatusBar, QMessageBox
+    QStatusBar, QMessageBox, QDialog, QFormLayout
 )
 from PySide6.QtCore import Qt
 
@@ -10,14 +10,51 @@ from src.ui.widgets.eleves_widget import ElevesWidget
 from src.ui.widgets.dashboard_widget import DashboardWidget
 from src.ui.widgets.fiche_eleve_widget import FicheEleveWidget
 from src.ui.widgets.paiements_widget import PaiementsWidget
+from src.ui.widgets.recus_widget import RecusWidget
+from src.services.eleve_service import EleveService
+
+
+class ParametresDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Parametres")
+        self.setMinimumWidth(400)
+        self._build_ui()
+
+    def _build_ui(self):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 20, 20, 20)
+
+        titre = QLabel("Parametres de l'application")
+        titre.setObjectName("Title")
+        layout.addWidget(titre)
+
+        frame = QFrame()
+        frame.setObjectName("Card")
+        form = QFormLayout(frame)
+        form.setContentsMargins(16, 12, 16, 12)
+
+        stats = EleveService().statistiques()
+
+        form.addRow("Nom de l'ecole :", QLabel("Ecole [NOM]"))
+        form.addRow("Annee scolaire :", QLabel("2024-2025"))
+        form.addRow("Devise :", QLabel("FCFA"))
+        form.addRow("", QLabel(""))
+        form.addRow("Nombre d'eleves :", QLabel(str(stats.get("nb_eleves", 0))))
+        form.addRow("Version :", QLabel("v1.0.0"))
+        form.addRow("Technologie :", QLabel("Python + PySide6 + SQLite"))
+
+        layout.addWidget(frame)
+
+        btn = QPushButton("Fermer")
+        btn.clicked.connect(self.accept)
+        layout.addWidget(btn)
 
 
 class MainWindow(QMainWindow):
-    """Fenêtre principale avec barre latérale de navigation."""
-
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("EduPaie — Gestion des paiements scolaires")
+        self.setWindowTitle("EduPaie - Gestion des paiements scolaires")
         self.setMinimumSize(1100, 700)
         self.resize(1280, 800)
 
@@ -40,19 +77,21 @@ class MainWindow(QMainWindow):
         self.eleves_widget = ElevesWidget()
         self.fiche_widget = FicheEleveWidget()
         self.paiements_widget = PaiementsWidget()
+        self.recus_widget = RecusWidget()
 
-        self.stack.addWidget(self.dashboard)        # index 0
-        self.stack.addWidget(self.eleves_widget)    # index 1
-        self.stack.addWidget(self.fiche_widget)     # index 2
-        self.stack.addWidget(self.paiements_widget) # index 3
+        self.stack.addWidget(self.dashboard)
+        self.stack.addWidget(self.eleves_widget)
+        self.stack.addWidget(self.fiche_widget)
+        self.stack.addWidget(self.paiements_widget)
+        self.stack.addWidget(self.recus_widget)
 
         layout.addWidget(self.stack, 1)
 
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
-        self.status_bar.showMessage("Prêt")
+        self.status_bar.showMessage("Pret")
 
-    def _creer_sidebar(self) -> QFrame:
+    def _creer_sidebar(self):
         sidebar = QFrame()
         sidebar.setObjectName("SideBar")
         sidebar.setFixedWidth(220)
@@ -61,15 +100,15 @@ class MainWindow(QMainWindow):
         vbox.setContentsMargins(0, 0, 0, 0)
         vbox.setSpacing(0)
 
-        logo = QLabel("🎓 EduPaie")
+        logo = QLabel("EduPaie")
         logo.setObjectName("Logo")
         vbox.addWidget(logo)
 
-        self.btn_dashboard = QPushButton("📊  Tableau de bord")
-        self.btn_eleves    = QPushButton("👥  Élèves")
-        self.btn_paiement  = QPushButton("💰  Paiements")
-        self.btn_recus     = QPushButton("📄  Reçus")
-        self.btn_param     = QPushButton("⚙️  Paramètres")
+        self.btn_dashboard = QPushButton("Tableau de bord")
+        self.btn_eleves    = QPushButton("Eleves")
+        self.btn_paiement  = QPushButton("Paiements")
+        self.btn_recus     = QPushButton("Recus")
+        self.btn_param     = QPushButton("Parametres")
 
         for b in [self.btn_dashboard, self.btn_eleves, self.btn_paiement,
                   self.btn_recus, self.btn_param]:
@@ -96,7 +135,9 @@ class MainWindow(QMainWindow):
         self.btn_paiement.clicked.connect(
             lambda: self._afficher_page(3, self.btn_paiement)
         )
-        self.btn_recus.clicked.connect(self._afficher_recus)
+        self.btn_recus.clicked.connect(
+            lambda: self._afficher_page(4, self.btn_recus)
+        )
         self.btn_param.clicked.connect(self._afficher_parametres)
 
         self.eleves_widget.eleve_selectionne.connect(self._afficher_fiche)
@@ -110,8 +151,11 @@ class MainWindow(QMainWindow):
         self.fiche_widget.paiement_enregistre.connect(
             self.paiements_widget.rafraichir
         )
+        self.fiche_widget.paiement_enregistre.connect(
+            self.recus_widget.rafraichir
+        )
 
-    def _afficher_page(self, index: int, bouton: QPushButton):
+    def _afficher_page(self, index, bouton):
         self.stack.setCurrentIndex(index)
         for b in [self.btn_dashboard, self.btn_eleves, self.btn_paiement,
                   self.btn_recus, self.btn_param]:
@@ -122,22 +166,16 @@ class MainWindow(QMainWindow):
             self.eleves_widget.rafraichir()
         elif index == 3:
             self.paiements_widget.rafraichir()
+        elif index == 4:
+            self.recus_widget.rafraichir()
 
-    def _afficher_fiche(self, eleve_id: int):
+    def _afficher_fiche(self, eleve_id):
         self.fiche_widget.charger_eleve(eleve_id)
         self.stack.setCurrentIndex(2)
         for b in [self.btn_dashboard, self.btn_eleves, self.btn_paiement,
                   self.btn_recus, self.btn_param]:
             b.setChecked(False)
 
-    def _afficher_recus(self):
-        QMessageBox.information(
-            self, "Reçus",
-            "La gestion des reçus arrive à l'étape 5."
-        )
-
     def _afficher_parametres(self):
-        QMessageBox.information(
-            self, "Paramètres",
-            "Les paramètres arrivent plus tard."
-        )
+        dialog = ParametresDialog(self)
+        dialog.exec()
