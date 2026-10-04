@@ -141,4 +141,5 @@ class RecusWidget(QWidget):
         recu_id = item.data(Qt.UserRole)
         if recu_id:
             dialog = RecuDialog(self, recu_id=recu_id)
+            dialog.exec()
             self.rafraichir()
