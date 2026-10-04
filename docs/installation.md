@@ -156,4 +156,119 @@ Pour toute question :
 
 ## 2. Contenu du dossier de distribution
 
-Apres telechargement, vous devez avoir :
+Apres telechargement, vous devez avoir :# EduPaie - Gestion des paiements scolaires
+
+Application desktop pour gerer les paiements des eleves dans un
+etablissement scolaire : enregistrement des eleves, calcul du solde
+restant du et generation de recus PDF numerotes.
+
+## Fonctionnalites
+
+- Gestion complete des eleves (ajout / modification / suppression)
+- Liste recherchable et filtrable par classe et statut
+- Enregistrement des paiements (especes, cheque, virement, mobile money)
+- Calcul automatique du solde restant du avec validation
+- Statut derive : Solde / Partiellement paye / Non paye
+- Historique des paiements par eleve
+- Generation de recus PDF numerotes uniques (REC-AAAA-NNN)
+- Tableau de bord avec statistiques en temps reel
+- Interface moderne (charte graphique QSS)
+
+## Captures d'ecran
+
+- Tableau de bord : docs/screenshots/01-dashboard.png
+- Liste des eleves : docs/screenshots/02-eleves.png
+- Fiche eleve : docs/screenshots/03-fiche.png
+- Dialogue paiement : docs/screenshots/04-paiement.png
+- Recus : docs/screenshots/05-recus.png
+- Parametres : docs/screenshots/06-parametres.png
+
+## Installation
+
+### Prerequis
+
+- Python 3.10 ou superieur (pour la version developpeur)
+- Windows 10/11 64 bits
+
+### Version developpeur
+
+Ouvrir un terminal et executer :
+
+git clone https://github.com/Francoise97/EduPaie.git
+cd EduPaie
+python -m venv venv
+source venv/Scripts/activate
+pip install -r requirements.txt
+python -m src.database.seed_runner
+python main.py
+
+### Version executable
+
+Voir le guide d'installation : docs/installation.md
+
+## Architecture
+
+Le projet suit une architecture en 3 couches :
+
+- database/ : Connexion SQLite + schema SQL
+- models/ : Entites metier (Eleve, Paiement, Recu)
+- repositories/ : Acces donnees (SQL encapsule)
+- services/ : Logique metier (calcul solde, validation, PDF)
+- utils/ : Validation + formatage
+- ui/ : Interface PySide6 (widgets, dialogs, resources)
+- config.py : Configuration (nom ecole, annee scolaire)
+
+Regle : aucun widget n'execute de SQL directement.
+
+## Base de donnees
+
+- Table eleve : nom, prenom, classe, annee_scolaire, frais_totaux
+- Table recu : numero_unique, montant_paye, solde_apres
+- Table paiement : montant, date, mode, reference, observation
+- Vue vue_solde_eleve : calcule automatiquement le solde et statut
+
+Voir le schema complet : docs/MCD_MLD.md
+
+## Documentation
+
+- docs/documentation.md : Architecture, choix techniques, limites
+- docs/manuel_utilisateur.md : Guide pas a pas pour l'utilisation
+- docs/installation.md : Installation de l'executable
+- docs/MCD_MLD.md : Modele de donnees
+- docs/guide_soutenance.md : Preparation de la soutenance
+- docs/FAQ.md : Questions frequentes
+- CHANGELOG.md : Historique des versions
+- CONTRIBUTING.md : Guide de contribution
+
+## Tests
+
+python -m pytest tests/
+
+## Packaging
+
+Windows : double-clic sur build.bat
+
+OU
+
+pyinstaller --onefile --windowed --name EduPaie --add-data "src/database/schema.sql;src/database" --add-data "src/ui/resources/styles.qss;src/ui/resources" main.py
+
+L'executable est genere dans dist/EduPaie.exe.
+
+## Technologies
+
+- Python 3.10+ - Langage principal
+- PySide6 - Interface graphique (Qt 6)
+- SQLite - Base de donnees locale
+- reportlab - Generation PDF
+- PyInstaller - Packaging executable
+
+## Auteur
+
+Francoise97
+
+Projet realise dans le cadre de la certification
+Developpeur web et web mobile (2018).
+
+## Licence
+
+MIT - voir LICENSE
