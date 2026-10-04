@@ -82,4 +82,5 @@ Executable dans dist/EduPaie.exe.
 
 ## Auteur
 
-Projet realise dans le cadre de la certification Developpeur web et web mobile (2018).
+Projet realise dans le cadre de la certification Developpeur web et web mobile (2026).
+
