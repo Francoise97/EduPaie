@@ -36,3 +36,9 @@ def libelle_statut(statut):
         "Non paye": "Non paye",
     }
     return correspondance.get(statut, statut)
+
+
+def formater_pourcentage(valeur, total):
+    if total == 0:
+        return "0%"
+    return str(int(valeur * 100 / total)) + "%"
