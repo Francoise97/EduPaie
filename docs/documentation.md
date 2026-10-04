@@ -150,3 +150,71 @@ La sequence est par annee. Chaque nouvelle annee repart a 001.
 - Envoi recus par email / SMS
 - Tableau de bord avec graphiques
 - Sauvegarde automatique
+
+
+---
+
+## 8. Captures d'ecran
+
+### 8.1 Tableau de bord
+
+![Tableau de bord](screenshots/01-dashboard.png)
+
+Vue d'ensemble : nombre d'eleves, total encaisse, restant du, eleves non soldes,
+repartition par statut et derniers paiements.
+
+### 8.2 Liste des eleves
+
+![Liste des eleves](screenshots/02-eleves.png)
+
+Liste complete avec recherche instantanee, filtres par classe et statut,
+et colonne "Reste a payer" coloree.
+
+### 8.3 Fiche eleve
+
+![Fiche eleve](screenshots/03-fiche.png)
+
+Informations personnelles, situation financiere (du / paye / solde restant)
+et historique complet des paiements.
+
+### 8.4 Enregistrement d'un paiement
+
+![Dialogue paiement](screenshots/04-paiement.png)
+
+Dialogue avec calcul en temps reel du nouveau solde et validation du montant.
+
+### 8.5 Liste des recus
+
+![Recus](screenshots/05-recus.png)
+
+Liste complete des recus numerotes avec acces direct au PDF.
+
+### 8.6 Parametres
+
+![Parametres](screenshots/06-parametres.png)
+
+Configuration centralisee (nom ecole, adresse, annee scolaire, devise).
+
+---
+
+## 9. Modele de donnees
+
+Voir le document dedie : [MCD/MLD](MCD_MLD.md)
+
+![Schema BDD](schema_bdd.png)
+
+---
+
+## 10. Guide d'installation
+
+Voir le document dedie : [Guide d'installation](installation.md)
+
+---
+
+## 11. Guide de soutenance
+
+Voir le document dedie : [Guide de soutenance](guide_soutenance.md)
+
+---
+
+**Fin de la documentation technique - EduPaie v1.0.0**
