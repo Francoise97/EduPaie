@@ -12,6 +12,10 @@ from src.ui.widgets.fiche_eleve_widget import FicheEleveWidget
 from src.ui.widgets.paiements_widget import PaiementsWidget
 from src.ui.widgets.recus_widget import RecusWidget
 from src.services.eleve_service import EleveService
+from src.config import (
+    ECOLE_NOM, ECOLE_ADRESSE, ECOLE_TELEPHONE, ECOLE_EMAIL,
+    DEVISE, ANNEE_SCOLAIRE_PAR_DEFAUT, VERSION
+)
 
 
 class ParametresDialog(QDialog):
@@ -36,12 +40,15 @@ class ParametresDialog(QDialog):
 
         stats = EleveService().statistiques()
 
-        form.addRow("Nom de l'ecole :", QLabel("Ecole [NOM]"))
-        form.addRow("Annee scolaire :", QLabel("2024-2025"))
-        form.addRow("Devise :", QLabel("FCFA"))
+        form.addRow("Nom de l'ecole :", QLabel(ECOLE_NOM))
+        form.addRow("Adresse :", QLabel(ECOLE_ADRESSE))
+        form.addRow("Telephone :", QLabel(ECOLE_TELEPHONE))
+        form.addRow("Email :", QLabel(ECOLE_EMAIL))
         form.addRow("", QLabel(""))
+        form.addRow("Annee scolaire :", QLabel(ANNEE_SCOLAIRE_PAR_DEFAUT))
+        form.addRow("Devise :", QLabel(DEVISE))
         form.addRow("Nombre d'eleves :", QLabel(str(stats.get("nb_eleves", 0))))
-        form.addRow("Version :", QLabel("v1.0.0"))
+        form.addRow("Version :", QLabel(VERSION))
         form.addRow("Technologie :", QLabel("Python + PySide6 + SQLite"))
 
         layout.addWidget(frame)
