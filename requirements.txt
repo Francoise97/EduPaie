@@ -1,0 +1,6 @@
+# Dependances de production
+PySide6>=6.8
+reportlab>=4.0
+
+# Dependances de packaging
+pyinstaller>=6.0
