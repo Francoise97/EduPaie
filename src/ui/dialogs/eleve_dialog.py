@@ -57,7 +57,7 @@ class EleveDialog(QDialog):
 
         self.input_annee = QComboBox()
         self.input_annee.setEditable(True)
-        self.input_annee.addItems(["2024-2025", "2025-2026", "2026-2027"])
+        self.input_annee.addItems(["2026-2027", "2027-2028", "2028-2029"])
         form.addRow("Année scolaire *", self.input_annee)
 
         self.input_frais = QDoubleSpinBox()

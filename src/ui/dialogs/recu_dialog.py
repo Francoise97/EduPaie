@@ -74,6 +74,8 @@ class RecuDialog(QDialog):
             form.addRow("Mode :", QLabel(self.paiement.mode_paiement))
             if self.paiement.reference:
                 form.addRow("Reference :", QLabel(self.paiement.reference))
+            if self.paiement.observation:
+                form.addRow("Observation :", QLabel(self.paiement.observation))
 
         form.addRow("Solde apres :",
                     QLabel("<b style='color:#EF4444;'>"

@@ -73,9 +73,10 @@ class FicheEleveWidget(QWidget):
         layout.addWidget(titre2)
 
         self.table = QTableWidget()
-        self.table.setColumnCount(6)
+        self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels([
-            "Recu N", "Date", "Montant", "Mode", "Solde apres", "Reference"
+            "Recu N", "Date", "Montant", "Mode", "Solde apres",
+            "Reference", "Observation"
         ])
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -89,7 +90,8 @@ class FicheEleveWidget(QWidget):
         h.setSectionResizeMode(2, QHeaderView.ResizeToContents)
         h.setSectionResizeMode(3, QHeaderView.ResizeToContents)
         h.setSectionResizeMode(4, QHeaderView.ResizeToContents)
-        h.setSectionResizeMode(5, QHeaderView.Stretch)
+        h.setSectionResizeMode(5, QHeaderView.ResizeToContents)
+        h.setSectionResizeMode(6, QHeaderView.Stretch)
 
         layout.addWidget(self.table, 1)
 
@@ -153,15 +155,18 @@ class FicheEleveWidget(QWidget):
                 p.mode_paiement,
                 formater_montant(p.solde_apres or 0),
                 p.reference or "-",
+                p.observation or "-",
             ]
             for col, val in enumerate(valeurs):
                 item = QTableWidgetItem(val)
-                if col != 5:
+                if col not in (5, 6):
                     item.setTextAlignment(Qt.AlignCenter)
                 if col == 2:
                     item.setForeground(QColor("#10B981"))
                 if col == 0:
                     item.setForeground(QColor("#1E3A8A"))
+                if col == 0:
+                    item.setData(Qt.UserRole, p.recu_id)
                 self.table.setItem(row, col, item)
 
     def _nouveau_paiement(self):

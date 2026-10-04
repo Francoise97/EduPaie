@@ -11,7 +11,6 @@ from src.services.eleve_service import EleveService
 from src.services.paiement_service import PaiementService
 from src.services.recu_service import RecuService
 from src.config import ECOLE_NOM as CFG_ECOLE_NOM, ECOLE_ADRESSE as CFG_ECOLE_ADRESSE, DEVISE as CFG_DEVISE
-from src.config import ECOLE_NOM, ECOLE_ADRESSE, DEVISE
 
 
 # Dossier des PDF : a cote de l'exe ou du projet
@@ -22,9 +21,9 @@ else:
 
 
 class PDFService:
-    ECOLE_NOM = ECOLE_NOM
-    ECOLE_ADRESSE = ECOLE_ADRESSE
-    DEVISE = DEVISE
+    ECOLE_NOM = CFG_ECOLE_NOM
+    ECOLE_ADRESSE = CFG_ECOLE_ADRESSE
+    DEVISE = CFG_DEVISE
 
     def __init__(self):
         self.eleve_service = EleveService()
