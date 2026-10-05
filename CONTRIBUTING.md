@@ -1,32 +1,45 @@
 # Guide de contribution - EduPaie
 
-Merci de votre interet pour EduPaie ! Ce document explique comment
-contribuer au projet.
+Merci de votre interet pour EduPaie !
 
-## Types de contributions
+## Comment contribuer
 
-- Rapports de bugs
-- Suggestions de fonctionnalites
-- Corrections de code
-- Amelioration de la documentation
-- Tests
+### 1. Signaler un bug
 
-## Workflow Git
+Ouvrir une issue avec :
+- Description du probleme
+- Etapes pour reproduire
+- Comportement attendu vs observe
+- Version de l'application
 
-1. Fork le projet
-2. Creer une branche :
-   git checkout -b feature/ma-fonctionnalite
+### 2. Proposer une fonctionnalite
 
-3. Faire les modifications
-4. Commiter avec un message clair :
-   git commit -m "feat: description"
+Ouvrir une issue avec le label "enhancement" :
+- Description de la fonctionnalite
+- Cas d'usage
+- Benefices attendus
 
-5. Pousser :
-   git push origin feature/ma-fonctionnalite
+### 3. Soumettre du code
 
-6. Ouvrir une Pull Request
+#### Fork et clone
 
-## Convention de commits
+    git clone https://github.com/VOTRE_USERNAME/EduPaie.git
+    cd EduPaie
+    git remote add upstream https://github.com/Francoise97/EduPaie.git
+
+#### Creer une branche
+
+    git checkout -b feature/ma-fonctionnalite
+
+#### Developper
+
+- Suivre les conventions de code (docs/CONVENTIONS.md)
+- Tester les modifications
+- Mettre a jour la documentation
+
+#### Commiter
+
+Convention de messages :
 
 | Prefixe | Usage |
 |---------|-------|
@@ -35,21 +48,33 @@ contribuer au projet.
 | docs: | Documentation |
 | style: | Formatage |
 | refactor: | Refactorisation |
-| test: | Ajout de tests |
-| chore: | Taches diverses |
+| test: | Tests |
+| chore: | Maintenance |
 
-## Style de code
+#### Pousser et Pull Request
 
-- Python : PEP 8
-- Indentation : 4 espaces
-- Longueur de ligne : 100 caracteres max
-- Langue des commentaires : francais
+    git push origin feature/ma-fonctionnalite
+
+Puis ouvrir une Pull Request sur GitHub.
+
+## Standards de code
+
+- PEP 8 pour Python
+- 4 espaces d'indentation
+- Lignes < 100 caracteres
+- Noms explicites
+- Commentaires en francais
 
 ## Tests
 
-Avant de soumettre, lancer :
-python -m pytest tests/
+Avant de soumettre :
 
-## Contact
+    python -m pytest tests/ -v
 
-Francoise97 - github.com/Francoise97
+## Code de conduite
+
+Voir CODE_OF_CONDUCT.md
+
+## Questions
+
+Contact : contact@mavictoire.tg
