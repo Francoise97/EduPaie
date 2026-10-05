@@ -24,3 +24,6 @@ recus/
 .DS_Store
 Thumbs.db
 distribution/
+backups/
+*.db.old
+*.bak
