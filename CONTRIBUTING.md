@@ -1,27 +1,55 @@
 # Guide de contribution - EduPaie
 
+Merci de votre interet pour EduPaie ! Ce document explique comment
+contribuer au projet.
+
+## Types de contributions
+
+- Rapports de bugs
+- Suggestions de fonctionnalites
+- Corrections de code
+- Amelioration de la documentation
+- Tests
+
 ## Workflow Git
 
-1. Creer une branche depuis `dev` :
-   git checkout dev
-   git pull origin dev
+1. Fork le projet
+2. Creer une branche :
    git checkout -b feature/ma-fonctionnalite
 
-2. Developper et commiter :
-   git add .
-   git commit -m "feat: description claire"
+3. Faire les modifications
+4. Commiter avec un message clair :
+   git commit -m "feat: description"
 
-3. Pousser vers GitHub :
-   git push -u origin feature/ma-fonctionnalite
+5. Pousser :
+   git push origin feature/ma-fonctionnalite
 
-4. Creer une Pull Request sur GitHub
+6. Ouvrir une Pull Request
 
 ## Convention de commits
 
-- `feat:` nouvelle fonctionnalite
-- `fix:` correction de bug
-- `docs:` documentation
-- `style:` formatage
-- `refactor:` refactorisation
-- `test:` ajout de tests
-- `chore:` taches diverses
+| Prefixe | Usage |
+|---------|-------|
+| feat: | Nouvelle fonctionnalite |
+| fix: | Correction de bug |
+| docs: | Documentation |
+| style: | Formatage |
+| refactor: | Refactorisation |
+| test: | Ajout de tests |
+| chore: | Taches diverses |
+
+## Style de code
+
+- Python : PEP 8
+- Indentation : 4 espaces
+- Longueur de ligne : 100 caracteres max
+- Langue des commentaires : francais
+
+## Tests
+
+Avant de soumettre, lancer :
+python -m pytest tests/
+
+## Contact
+
+Francoise97 - github.com/Francoise97
