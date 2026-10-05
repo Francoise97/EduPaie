@@ -1,4 +1,4 @@
-# Normalisation des fins de ligne
+# Normalisation automatique
 * text=auto
 
 # Windows
@@ -8,14 +8,38 @@
 # Python
 *.py text eol=lf
 *.py diff=python
+*.py linguist-language=Python
+
+# SQL
+*.sql text eol=lf
+*.sql linguist-language=SQL
+
+# Markdown
+*.md text eol=lf
+*.md linguist-documentation
+
+# QSS (CSS pour Qt)
+*.qss text eol=lf
+*.qss linguist-language=CSS
+
+# JSON / YAML
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
 
 # Fichiers binaires
 *.png binary
 *.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
 *.pdf binary
 *.db binary
 *.exe binary
+*.zip binary
 
-# Linguist (eviter que Python soit masque)
-*.md linguist-documentation
-*.qss linguist-language=CSS
+# Exclusions linguist
+*.spec linguist-generated
+*.qss linguist-detectable
+docs/** linguist-documentation
+tests/** linguist-test
