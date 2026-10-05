@@ -67,6 +67,7 @@ class RecusWidget(QWidget):
         h.setSectionResizeMode(5, QHeaderView.ResizeToContents)
 
         layout.addWidget(self.table, 1)
+        self.table.setMaximumHeight(400)
 
         pied = QHBoxLayout()
         pied.addStretch()
@@ -75,6 +76,13 @@ class RecusWidget(QWidget):
         self.btn_voir.setObjectName("Secondary")
         self.btn_voir.clicked.connect(self._voir_recu)
         pied.addWidget(self.btn_voir)
+
+        self.btn_annuler = QPushButton("Annuler le paiement")
+        self.btn_annuler.setObjectName("Danger")
+        self.btn_annuler.setMinimumWidth(200)
+        self.btn_annuler.clicked.connect(self._annuler_paiement)
+        pied.addWidget(self.btn_annuler)
+        
 
         self.label_total = QLabel("Total : 0 recus")
         self.label_total.setStyleSheet(
@@ -137,9 +145,56 @@ class RecusWidget(QWidget):
             QMessageBox.warning(self, "Aucune selection",
                                 "Selectionne un recu dans la liste.")
             return
+
         item = self.table.item(row, 0)
+        if not item:
+            return
+
         recu_id = item.data(Qt.UserRole)
         if recu_id:
             dialog = RecuDialog(self, recu_id=recu_id)
             dialog.exec()
             self.rafraichir()
+
+    def _annuler_paiement(self):
+        """Annule un paiement apres confirmation."""
+        row = self.table.currentRow()
+        if row < 0:
+            QMessageBox.warning(self, "Aucune selection",
+                                "Selectionne un recu dans la liste.")
+            return
+
+        item = self.table.item(row, 0)
+        if not item:
+            return
+
+        recu_id = item.data(Qt.UserRole)
+        if not recu_id:
+            return
+
+        numero_recu = item.text()
+
+        reponse = QMessageBox.question(
+            self, "Confirmer l'annulation",
+            "Voulez-vous vraiment annuler ce paiement ?\n\n"
+            "Recu N : " + numero_recu + "\n\n"
+            "ATTENTION : Cette action est irreversible.\n"
+            "Le recu sera aussi supprime.",
+            QMessageBox.Yes | QMessageBox.No
+        )
+
+        if reponse != QMessageBox.Yes:
+            return
+
+        recu = self.recu_service.obtenir(recu_id)
+        if not recu:
+            QMessageBox.warning(self, "Erreur", "Recu introuvable.")
+            return
+
+        try:
+            self.recu_service.repo.supprimer(recu_id)
+            QMessageBox.information(self, "Succes",
+                                    "Paiement et recu annules.")
+            self.rafraichir()
+        except Exception as e:
+            QMessageBox.critical(self, "Erreur", str(e))

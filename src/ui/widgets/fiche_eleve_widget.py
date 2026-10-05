@@ -105,6 +105,7 @@ class FicheEleveWidget(QWidget):
         h.setSectionResizeMode(6, QHeaderView.Stretch)
 
         layout.addWidget(self.table, 1)
+        self.table.setMaximumHeight(300)
 
         # --- Message si vide ---
         self.lbl_vide = QLabel("Aucun paiement enregistre pour cet eleve.")
