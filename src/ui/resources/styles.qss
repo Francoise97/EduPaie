@@ -42,29 +42,37 @@ QMainWindow, QDialog {
     background-color: #1E3A8A;
 }
 
+/* Bouton normal : texte bleu clair, fond transparent */
 #SideBar QPushButton {
     color: #E0E7FF;
     background-color: transparent;
     border: none;
+    border-bottom: 1px solid #3B5FBF;
     padding: 14px 16px;
     text-align: left;
     font-family: "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
     font-size: 14px;
-    font-weight: 7tou00;
+    font-weight: 700;
     letter-spacing: 0.5px;
-    border-left: 3px solid transparent;
-}   
-
-
-#SideBar QPushButton:hover {
-    background-color: #1E40AF;
-    color: #FFFFFF;
 }
 
+/* Survol : SEULEMENT le texte devient blanc, PAS de fond */
+#SideBar QPushButton:hover {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+/* Bouton ACTIF : fond bleu vif, texte blanc */
 #SideBar QPushButton:checked {
     background-color: #2563EB;
     color: #FFFFFF;
-    font-weight: 600;
+    font-weight: 700;
+}
+
+/* Bouton actif + survol : on garde le fond bleu vif */
+#SideBar QPushButton:checked:hover {
+    background-color: #2563EB;
+    color: #FFFFFF;
 }
 
 /* ----- Titres ----- */
