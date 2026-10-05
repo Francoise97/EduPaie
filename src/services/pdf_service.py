@@ -157,7 +157,7 @@ class PDFService:
         c.setFont("Helvetica", 9)
 
         c.line(marge, y_sig, marge + 50 * mm, y_sig)
-        c.drawString(marge + 5 * mm, y_sig - 5 * mm, "Le Caissier")
+        c.drawString(marge + 5 * mm, y_sig - 5 * mm, "La Secretaire")
 
         c.line(largeur - marge - 50 * mm, y_sig, largeur - marge, y_sig)
         c.drawString(largeur - marge - 45 * mm, y_sig - 5 * mm, "L'Etablissement")
