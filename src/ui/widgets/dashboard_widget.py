@@ -74,7 +74,9 @@ class DashboardWidget(QWidget):
 
         self.label_repartition = QLabel("")
         self.label_repartition.setStyleSheet(
-            "font-size: 13px; padding: 10px 0; color: #475569;"
+            "font-size: 13px; padding: 15px; "
+            "background-color: #FFFFFF; border: 1px solid #E2E8F0; "
+            "border-radius: 10px; color: #475569;"
         )
         layout.addWidget(self.label_repartition)
 
@@ -118,24 +120,63 @@ class DashboardWidget(QWidget):
                         (stats.get("nb_partiels", 0) or 0)
         self.carte_non_soldes.set_valeur(str(nb_non_soldes))
 
+        # ============ REPARTITION STYLISEE ============
         nb_eleves = stats.get("nb_eleves", 0) or 1
         soldes = stats.get("nb_soldes", 0) or 0
         partiels = stats.get("nb_partiels", 0) or 0
         non_payes = stats.get("nb_non_payes", 0) or 0
 
-        def barre(n):
-            nb_blocs = int(round((n / nb_eleves) * 20))
-            return "X" * nb_blocs + "." * (20 - nb_blocs)
+        # Construire le HTML avec style
+        html = "<div style='font-family: Segoe UI Variable Display, Segoe UI, Arial;'>"
+        html += "<p style='font-size: 14px; font-weight: 700; color: #1E3A8A; "
+        html += "letter-spacing: 1px; margin-bottom: 10px;'>"
+        html += "REPARTITION PAR STATUT</p>"
 
-        self.label_repartition.setText(
-            "Soldes        : " + barre(soldes) + "  " + str(soldes) + " eleves "
-            "(" + str(soldes * 100 // nb_eleves) + "%)\n"
-            "Partiels      : " + barre(partiels) + "  " + str(partiels) + " eleves "
-            "(" + str(partiels * 100 // nb_eleves) + "%)\n"
-            "Non payes     : " + barre(non_payes) + "  " + str(non_payes) + " eleves "
-            "(" + str(non_payes * 100 // nb_eleves) + "%)"
-        )
+        # Ligne 1 - Soldes (vert)
+        pct_soldes = int(soldes * 100 / nb_eleves)
+        blocs_soldes = int(round(pct_soldes / 5))
+        barre_soldes = "X" * blocs_soldes + "." * (20 - blocs_soldes)
+        html += "<p style='font-size: 13px; margin: 6px 0;'>"
+        html += "<span style='color: #10B981; font-weight: 700;'>"
+        html += "Soldes</span>"
+        html += "<span style='color: #10B981; margin-left: 20px;'>"
+        html += barre_soldes + "</span>"
+        html += "<span style='color: #10B981; font-weight: 700; margin-left: 15px;'>"
+        html += str(soldes) + " (" + str(pct_soldes) + "%)</span>"
+        html += "</p>"
 
+        # Ligne 2 - Partiels (orange)
+        pct_partiels = int(partiels * 100 / nb_eleves)
+        blocs_partiels = int(round(pct_partiels / 5))
+        barre_partiels = "X" * blocs_partiels + "." * (20 - blocs_partiels)
+        html += "<p style='font-size: 13px; margin: 6px 0;'>"
+        html += "<span style='color: #F59E0B; font-weight: 700;'>"
+        html += "Partiels</span>"
+        html += "<span style='color: #F59E0B; margin-left: 10px;'>"
+        html += barre_partiels + "</span>"
+        html += "<span style='color: #F59E0B; font-weight: 700; margin-left: 15px;'>"
+        html += str(partiels) + " (" + str(pct_partiels) + "%)</span>"
+        html += "</p>"
+
+        # Ligne 3 - Non payes (rouge)
+        pct_non_payes = int(non_payes * 100 / nb_eleves)
+        blocs_non_payes = int(round(pct_non_payes / 5))
+        barre_non_payes = "X" * blocs_non_payes + "." * (20 - blocs_non_payes)
+        html += "<p style='font-size: 13px; margin: 6px 0;'>"
+        html += "<span style='color: #EF4444; font-weight: 700;'>"
+        html += "Non payes</span>"
+        html += "<span style='color: #EF4444; margin-left: 5px;'>"
+        html += barre_non_payes + "</span>"
+        html += "<span style='color: #EF4444; font-weight: 700; margin-left: 15px;'>"
+        html += str(non_payes) + " (" + str(pct_non_payes) + "%)</span>"
+        html += "</p>"
+
+        html += "</div>"
+
+        self.label_repartition.setText(html)
+        self.label_repartition.setTextFormat(Qt.TextFormat.RichText)
+
+        # ============ DERNIERS PAIEMENTS ============
         paiements = self.paiement_service.derniers(8)
         self.table.setRowCount(len(paiements))
 
@@ -154,4 +195,4 @@ class DashboardWidget(QWidget):
                     item.setTextAlignment(Qt.AlignCenter)
                 if col == 0:
                     item.setForeground(QColor("#1E3A8A"))
-                self.table.setItem(row, col, item)
+                self.table.setItem(row, col, item)  
