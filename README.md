@@ -24,7 +24,7 @@ Prerequis : Python 3.10+, Windows 10/11
 
 Version developpeur :
 
-    git clone https://github.com/Francoise97/EduPaie.git
+    git clone https://github.com/Françoise/EduPaie.git
     cd EduPaie
     python -m venv venv
     source venv/Scripts/activate
@@ -63,7 +63,7 @@ Python 3.10+ / PySide6 (Qt 6) / SQLite / reportlab / PyInstaller
 
 ## Auteur
 
-Francoise97 - Projet Developpeur web et web mobile (2018)
+Françoise - Projet Developpeur web et web mobile (2018)
 
 ## Licence
 

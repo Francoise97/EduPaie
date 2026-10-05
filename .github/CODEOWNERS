@@ -1,25 +1,25 @@
 # CODEOWNERS - EduPaie
 
 # Proprietaire par defaut
-* @Francoise97
+* @Françoise
 
 # Code source
-/src/ @Francoise97
+/src/ @Françoise
 
 # Base de donnees
-/src/database/ @Francoise97
-/src/models/ @Francoise97
+/src/database/ @Françoise
+/src/models/ @Françoise
 
 # Tests
-/tests/ @Francoise97
+/tests/ @Françoise
 
 # Documentation
-/docs/ @Francoise97
-*.md @Francoise97
+/docs/ @Françoise
+*.md @Françoise
 
 # Scripts
-/scripts/ @Francoise97
+/scripts/ @Françoise
 
 # Configuration
-.gitignore @Francoise97
-requirements.txt @Francoise97
+.gitignore @Françoise
+requirements.txt @Françoise

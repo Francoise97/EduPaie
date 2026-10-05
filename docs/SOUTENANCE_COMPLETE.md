@@ -2,7 +2,7 @@
 
 > Document complet de preparation pour la soutenance orale
 > Duree cible : 12-15 minutes
-> Auteur : Francoise97
+> Auteur : Françoise
 
 ---
 
@@ -22,12 +22,12 @@
 **Contenu :**
 - Titre : EduPaie
 - Sous-titre : Gestion des paiements scolaires
-- Auteur : Francoise97
+- Auteur : Françoise
 - Certification : Developpeur web et web mobile (2018)
 - Date : Octobre 2026
 
 **A dire :**
-"Bonjour a tous. Je m'appelle Francoise et je vais vous presenter EduPaie,
+"Bonjour a tous. Je m'appelle Françoise et je vais vous presenter EduPaie,
 une application desktop de gestion des paiements scolaires. Cette presentation
 durera environ 12 minutes, suivie d'une demonstration et de vos questions."
 

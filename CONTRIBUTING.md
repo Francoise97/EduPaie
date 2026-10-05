@@ -25,7 +25,7 @@ Ouvrir une issue avec le label "enhancement" :
 
     git clone https://github.com/VOTRE_USERNAME/EduPaie.git
     cd EduPaie
-    git remote add upstream https://github.com/Francoise97/EduPaie.git
+    git remote add upstream https://github.com/Françoise/EduPaie.git
 
 #### Creer une branche
 

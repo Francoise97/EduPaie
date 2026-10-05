@@ -2,7 +2,7 @@
 
 ## Auteur principal
 
-Francoise97
+Françoise
 - Developpement complet
 - Architecture
 - Documentation
@@ -17,4 +17,4 @@ Francoise97
 
 ## Contact
 
-- GitHub : github.com/Francoise97
+- GitHub : github.com/Françoise
