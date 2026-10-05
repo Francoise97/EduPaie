@@ -48,7 +48,7 @@ QMainWindow, QDialog {
 #SideBar QPushButton:checked {
     background-color: #2563EB;
     color: #FFFFFF;
-    border-left: 3px solid #60A5FA;
+    border-left: 6px solid #60A5FA;
     font-weight: bold;
 }
 
