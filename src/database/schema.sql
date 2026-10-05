@@ -41,6 +41,9 @@ CREATE TABLE IF NOT EXISTS paiement (
                        ('Especes','Cheque','Virement','Mobile Money')),
     reference       TEXT,
     observation     TEXT,
+    annule              INTEGER NOT NULL DEFAULT 0,
+    raison_annulation   TEXT,
+    date_annulation     TEXT,
     date_creation   TEXT    NOT NULL DEFAULT (datetime('now','localtime')),
     FOREIGN KEY (eleve_id) REFERENCES eleve(id) ON DELETE CASCADE,
     FOREIGN KEY (recu_id)  REFERENCES recu(id)   ON DELETE CASCADE
@@ -48,15 +51,21 @@ CREATE TABLE IF NOT EXISTS paiement (
 
 CREATE INDEX IF NOT EXISTS idx_paiement_eleve ON paiement(eleve_id);
 CREATE INDEX IF NOT EXISTS idx_paiement_date  ON paiement(date_paiement);
+CREATE INDEX IF NOT EXISTS idx_paiement_annule ON paiement(annule);
 
 CREATE VIEW IF NOT EXISTS vue_solde_eleve AS
 SELECT
-    e.id, e.nom, e.prenom, e.classe, e.annee_scolaire, e.frais_totaux,
-    COALESCE(SUM(p.montant), 0)                  AS total_paye,
-    e.frais_totaux - COALESCE(SUM(p.montant), 0) AS solde_restant,
+    e.id,
+    e.nom,
+    e.prenom,
+    e.classe,
+    e.annee_scolaire,
+    e.frais_totaux,
+    COALESCE(SUM(CASE WHEN p.annule = 0 THEN p.montant ELSE 0 END), 0) AS total_paye,
+    e.frais_totaux - COALESCE(SUM(CASE WHEN p.annule = 0 THEN p.montant ELSE 0 END), 0) AS solde_restant,
     CASE
-        WHEN COALESCE(SUM(p.montant), 0) = 0 THEN 'Non paye'
-        WHEN COALESCE(SUM(p.montant), 0) >= e.frais_totaux THEN 'Solde'
+        WHEN COALESCE(SUM(CASE WHEN p.annule = 0 THEN p.montant ELSE 0 END), 0) = 0 THEN 'Non paye'
+        WHEN COALESCE(SUM(CASE WHEN p.annule = 0 THEN p.montant ELSE 0 END), 0) >= e.frais_totaux THEN 'Solde'
         ELSE 'Partiellement paye'
     END AS statut
 FROM eleve e

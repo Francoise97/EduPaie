@@ -1,4 +1,5 @@
 """Repository des paiements."""
+from datetime import datetime
 from src.database.db_manager import DatabaseManager
 from src.models.paiement import Paiement
 
@@ -19,7 +20,22 @@ class PaiementRepository:
         self.conn.commit()
         return cur.lastrowid
 
+    def annuler(self, paiement_id, raison):
+        """Marque un paiement comme annule (soft delete)."""
+        date_annulation = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        self.conn.execute(
+            """UPDATE paiement
+               SET annule = 1,
+                   raison_annulation = ?,
+                   date_annulation = ?
+               WHERE id = ?""",
+            (raison, date_annulation, paiement_id),
+        )
+        self.conn.commit()
+
     def lister_par_eleve(self, eleve_id):
+        """Retourne tous les paiements d'un eleve (actifs + annules)."""
         rows = self.conn.execute(
             """SELECT p.*, r.numero_unique AS numero_recu,
                       r.solde_apres AS solde_apres
@@ -32,6 +48,7 @@ class PaiementRepository:
         return [Paiement.from_row(r) for r in rows]
 
     def lister_tous(self):
+        """Retourne tous les paiements (actifs + annules)."""
         rows = self.conn.execute(
             """SELECT p.*, r.numero_unique AS numero_recu,
                       r.solde_apres AS solde_apres,
@@ -43,7 +60,21 @@ class PaiementRepository:
         ).fetchall()
         return [Paiement.from_row(r) for r in rows]
 
+    def lister_actifs_par_eleve(self, eleve_id):
+        """Retourne uniquement les paiements actifs d'un eleve."""
+        rows = self.conn.execute(
+            """SELECT p.*, r.numero_unique AS numero_recu,
+                      r.solde_apres AS solde_apres
+               FROM paiement p
+               LEFT JOIN recu r ON r.id = p.recu_id
+               WHERE p.eleve_id = ? AND p.annule = 0
+               ORDER BY p.date_paiement DESC, p.id DESC""",
+            (eleve_id,),
+        ).fetchall()
+        return [Paiement.from_row(r) for r in rows]
+
     def derniers(self, limite=5):
+        """Les N derniers paiements actifs."""
         rows = self.conn.execute(
             """SELECT p.*, r.numero_unique AS numero_recu,
                       r.solde_apres AS solde_apres,
@@ -51,6 +82,7 @@ class PaiementRepository:
                FROM paiement p
                LEFT JOIN recu r ON r.id = p.recu_id
                LEFT JOIN eleve e ON e.id = p.eleve_id
+               WHERE p.annule = 0
                ORDER BY p.date_paiement DESC, p.id DESC
                LIMIT ?""",
             (limite,),
@@ -70,11 +102,12 @@ class PaiementRepository:
 
     def total_par_eleve(self, eleve_id):
         row = self.conn.execute(
-            "SELECT COALESCE(SUM(montant), 0) FROM paiement WHERE eleve_id = ?",
+            "SELECT COALESCE(SUM(montant), 0) FROM paiement WHERE eleve_id = ? AND annule = 0",
             (eleve_id,),
         ).fetchone()
         return row[0]
 
     def supprimer(self, paiement_id):
+        """Suppression DEFINITIVE (a eviter - utiliser annuler)."""
         self.conn.execute("DELETE FROM paiement WHERE id = ?", (paiement_id,))
         self.conn.commit()

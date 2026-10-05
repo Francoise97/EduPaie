@@ -2,10 +2,11 @@
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QFrame,
     QPushButton, QTableWidget, QTableWidgetItem, QHeaderView,
-    QAbstractItemView, QMessageBox, QFormLayout, QComboBox
+    QAbstractItemView, QMessageBox, QFormLayout, QComboBox,
+    QDialog, QLineEdit
 )
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QColor
+from PySide6.QtGui import QColor, QFont
 
 from src.services.eleve_service import EleveService
 from src.services.paiement_service import PaiementService
@@ -80,19 +81,19 @@ class FicheEleveWidget(QWidget):
         titre2.setStyleSheet("font-size: 16px;")
         layout.addWidget(titre2)
 
-        # --- Tableau historique (7 colonnes) ---
+        # --- Tableau historique (8 colonnes : ajout Statut) ---
         self.table = QTableWidget()
-        self.table.setColumnCount(7)
+        self.table.setColumnCount(8)
         self.table.setHorizontalHeaderLabels([
             "Recu N", "Date", "Montant", "Mode",
-            "Solde apres", "Reference", "Observation"
+            "Solde apres", "Reference", "Observation", "Statut"
         ])
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table.setSelectionMode(QAbstractItemView.SingleSelection)
         self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.table.verticalHeader().setVisible(False)
         self.table.setAlternatingRowColors(True)
-        self.table.setMinimumHeight(200)
+        self.table.setMinimumHeight(250)
         self.table.doubleClicked.connect(lambda _idx: self._voir_recu_selectionne())
 
         h = self.table.horizontalHeader()
@@ -103,9 +104,9 @@ class FicheEleveWidget(QWidget):
         h.setSectionResizeMode(4, QHeaderView.ResizeToContents)
         h.setSectionResizeMode(5, QHeaderView.ResizeToContents)
         h.setSectionResizeMode(6, QHeaderView.Stretch)
+        h.setSectionResizeMode(7, QHeaderView.ResizeToContents)
 
         layout.addWidget(self.table, 1)
-        self.table.setMaximumHeight(300)
 
         # --- Message si vide ---
         self.lbl_vide = QLabel("Aucun paiement enregistre pour cet eleve.")
@@ -170,7 +171,7 @@ class FicheEleveWidget(QWidget):
             self.btn_paiement.setEnabled(True)
             self.btn_paiement.setText("Enregistrer un paiement")
 
-        # Historique
+        # Historique (TOUS les paiements : actifs + annules)
         paiements = self.paiement_service.lister_par_eleve(self.eleve.id)
         self.table.setRowCount(len(paiements))
 
@@ -186,6 +187,18 @@ class FicheEleveWidget(QWidget):
             self.btn_annuler.setEnabled(True)
 
         for row, p in enumerate(paiements):
+            # Statut
+            if p.annule == 1:
+                statut_txt = "Annule"
+                statut_color = QColor("#EF4444")
+                # Prix barre
+                font = QFont()
+                font.setStrikeOut(True)
+            else:
+                statut_txt = "Actif"
+                statut_color = QColor("#10B981")
+                font = QFont()
+
             valeurs = [
                 p.numero_recu or "-",
                 formater_date(p.date_paiement),
@@ -194,16 +207,30 @@ class FicheEleveWidget(QWidget):
                 formater_montant(p.solde_apres or 0),
                 p.reference or "-",
                 p.observation or "-",
+                statut_txt,
             ]
             for col, val in enumerate(valeurs):
                 item = QTableWidgetItem(val)
+
+                # Alignement
                 if col != 6:
                     item.setTextAlignment(Qt.AlignCenter)
+
+                # Couleurs
                 if col == 2:
-                    item.setForeground(QColor("#10B981"))
+                    item.setForeground(QColor("#10B981") if p.annule == 0
+                                       else QColor("#94A3B8"))
                 if col == 0:
-                    item.setForeground(QColor("#1E3A8A"))
+                    item.setForeground(QColor("#1E3A8A") if p.annule == 0
+                                       else QColor("#94A3B8"))
                     item.setData(Qt.UserRole, p.recu_id)
+                if col == 7:
+                    item.setForeground(statut_color)
+
+                # Barre les paiements annules
+                if p.annule == 1:
+                    item.setFont(font)
+
                 self.table.setItem(row, col, item)
 
     def _voir_recu_selectionne(self):
@@ -221,7 +248,7 @@ class FicheEleveWidget(QWidget):
             dialog.exec()
 
     def _annuler_paiement(self):
-        """Annule un paiement apres confirmation avec raison."""
+        """Annule un paiement (soft delete) avec raison."""
         row = self.table.currentRow()
         if row < 0:
             QMessageBox.warning(self, "Aucune selection",
@@ -235,20 +262,26 @@ class FicheEleveWidget(QWidget):
         if not recu_id:
             return
 
-        # Recuperer les infos du paiement
+        # Verifier que le paiement n'est pas deja annule
+        statut_item = self.table.item(row, 7)
+        if statut_item and statut_item.text() == "Annule":
+            QMessageBox.information(self, "Deja annule",
+                                    "Ce paiement est deja annule.")
+            return
+
+        # Recuperer les infos
         numero_recu = item.text()
         montant_item = self.table.item(row, 2)
         montant = montant_item.text() if montant_item else ""
         date_item = self.table.item(row, 1)
         date_p = date_item.text() if date_item else ""
 
-        # Dialogue de confirmation personnalise
-        from PySide6.QtWidgets import QDialog, QVBoxLayout as _VBox
+        # --- Dialogue personnalise ---
         dialog = QDialog(self)
         dialog.setWindowTitle("Annuler un paiement")
-        dialog.setMinimumWidth(450)
+        dialog.setMinimumWidth(480)
 
-        vbox = _VBox(dialog)
+        vbox = QVBoxLayout(dialog)
         vbox.setContentsMargins(20, 20, 20, 20)
         vbox.setSpacing(12)
 
@@ -292,7 +325,6 @@ class FicheEleveWidget(QWidget):
         label_comm.setStyleSheet("font-weight: bold; margin-top: 8px;")
         vbox.addWidget(label_comm)
 
-        from PySide6.QtWidgets import QLineEdit
         commentaire = QLineEdit()
         commentaire.setPlaceholderText("Details supplementaires...")
         vbox.addWidget(commentaire)
@@ -300,7 +332,7 @@ class FicheEleveWidget(QWidget):
         # Avertissement
         warn = QLabel(
             "ATTENTION : Cette action est irreversible.\n"
-            "Le paiement et le recu associe seront supprimes."
+            "Le paiement sera marque comme annule (visible dans l'historique)."
         )
         warn.setStyleSheet(
             "color: #991B1B; font-size: 12px; "
@@ -310,8 +342,7 @@ class FicheEleveWidget(QWidget):
         vbox.addWidget(warn)
 
         # Boutons
-        from PySide6.QtWidgets import QHBoxLayout as _HBox
-        boutons = _HBox()
+        boutons = QHBoxLayout()
         boutons.addStretch()
 
         btn_non = QPushButton("Non, annuler")
@@ -319,7 +350,7 @@ class FicheEleveWidget(QWidget):
         btn_non.clicked.connect(dialog.reject)
         boutons.addWidget(btn_non)
 
-        btn_oui = QPushButton("Oui, supprimer")
+        btn_oui = QPushButton("Oui, confirmer")
         btn_oui.setObjectName("Danger")
         btn_oui.clicked.connect(dialog.accept)
         boutons.addWidget(btn_oui)
@@ -347,8 +378,8 @@ class FicheEleveWidget(QWidget):
             QMessageBox.warning(self, "Erreur", "Paiement introuvable.")
             return
 
-        # Supprimer
-        ok, msg = self.paiement_service.supprimer(paiement_id)
+        # Annuler (soft delete)
+        ok, msg = self.paiement_service.annuler(paiement_id, raison)
         if ok:
             QMessageBox.information(
                 self, "Succes",

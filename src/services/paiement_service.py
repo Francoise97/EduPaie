@@ -1,4 +1,4 @@
-"""Service métier : enregistrement des paiements."""
+"""Service metier : enregistrement des paiements."""
 from datetime import datetime
 from typing import List, Optional, Tuple
 from src.models.paiement import Paiement
@@ -12,7 +12,7 @@ from src.utils.validators import (
 
 
 class PaiementService:
-    """Logique métier : enregistrer un paiement + générer le reçu associé."""
+    """Logique metier : enregistrer un paiement + generer le recu associe."""
 
     def __init__(self):
         self.paiement_repo = PaiementRepository()
@@ -21,15 +21,25 @@ class PaiementService:
 
     # ---------- Lecture ----------
     def lister_par_eleve(self, eleve_id: int) -> List[Paiement]:
+        """Retourne TOUS les paiements d'un eleve (actifs + annules)."""
         return self.paiement_repo.lister_par_eleve(eleve_id)
 
+    def lister_actifs_par_eleve(self, eleve_id: int) -> List[Paiement]:
+        """Retourne uniquement les paiements ACTIFS d'un eleve."""
+        return self.paiement_repo.lister_actifs_par_eleve(eleve_id)
+
     def lister_tous(self) -> List[Paiement]:
+        """Retourne tous les paiements (actifs + annules)."""
         return self.paiement_repo.lister_tous()
 
     def derniers(self, limite: int = 5) -> List[Paiement]:
+        """Retourne les N derniers paiements ACTIFS."""
         return self.paiement_repo.derniers(limite)
 
-    # ---------- Création ----------
+    def obtenir(self, paiement_id: int) -> Optional[Paiement]:
+        return self.paiement_repo.obtenir(paiement_id)
+
+    # ---------- Creation ----------
     def enregistrer(self,
                     eleve_id: int,
                     montant,
@@ -42,13 +52,13 @@ class PaiementService:
 
         Retourne (True, Paiement) ou (False, message_erreur).
         """
-        # 1) Vérifier l'élève
+        # 1) Verifier l'eleve
         eleve = self.eleve_repo.obtenir(eleve_id)
         if not eleve:
-            return False, "Élève introuvable."
+            return False, "Eleve introuvable."
 
         if eleve.solde_restant <= 0:
-            return False, f"{eleve.nom_complet} a déjà soldé ses frais."
+            return False, f"{eleve.nom_complet} a deja solde ses frais."
 
         # 2) Valider le montant par rapport au solde
         ok, result = valider_paiement(montant, eleve.solde_restant)
@@ -71,9 +81,11 @@ class PaiementService:
 
         try:
             conn = self.eleve_repo.conn
+
+            # --- Transaction : recu + paiement ---
             conn.execute("BEGIN")
 
-            # a) Créer le reçu
+            # a) Creer le recu
             recu = self.recu_service.creer_recu(
                 eleve_id=eleve_id,
                 montant_paye=montant_float,
@@ -81,7 +93,7 @@ class PaiementService:
                 date_paiement=date_paiement,
             )
 
-            # b) Créer le paiement
+            # b) Creer le paiement
             paiement = Paiement(
                 eleve_id=eleve_id,
                 recu_id=recu.id,
@@ -101,9 +113,33 @@ class PaiementService:
             conn.rollback()
             return False, f"Erreur lors de l'enregistrement : {e}"
 
-    def supprimer(self, paiement_id: int) -> tuple[bool, str]:
+    # ---------- Annulation ----------
+    def annuler(self, paiement_id: int, raison: str) -> Tuple[bool, str]:
+        """Annule un paiement (soft delete - conserve l'historique).
+
+        Retourne (True, message) ou (False, message_erreur).
+        """
+        # 1) Verifier que le paiement existe
+        paiement = self.paiement_repo.obtenir(paiement_id)
+        if not paiement:
+            return False, "Paiement introuvable."
+
+        # 2) Verifier qu'il n'est pas deja annule
+        if paiement.annule == 1:
+            return False, "Ce paiement est deja annule."
+
+        # 3) Annuler (soft delete)
+        try:
+            self.paiement_repo.annuler(paiement_id, raison)
+            return True, "Paiement annule avec succes."
+        except Exception as e:
+            return False, "Erreur lors de l'annulation : " + str(e)
+
+    # ---------- Suppression definitive (a eviter) ----------
+    def supprimer(self, paiement_id: int) -> Tuple[bool, str]:
+        """Suppression DEFINITIVE - a utiliser avec precaution."""
         try:
             self.paiement_repo.supprimer(paiement_id)
-            return True, "Paiement supprimé."
+            return True, "Paiement supprime."
         except Exception as e:
             return False, f"Erreur : {e}"
