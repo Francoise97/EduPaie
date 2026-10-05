@@ -50,10 +50,11 @@ QMainWindow, QDialog {
     text-align: left;
     font-family: "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 7tou00;
     letter-spacing: 0.5px;
     border-left: 3px solid transparent;
-}
+}   
+
 
 #SideBar QPushButton:hover {
     background-color: #1E40AF;

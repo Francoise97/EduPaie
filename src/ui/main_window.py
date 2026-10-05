@@ -115,10 +115,10 @@ class MainWindow(QMainWindow):
         vbox.addWidget(sous_titre)
 
         self.btn_dashboard = QPushButton("Tableau de bord")
-        self.btn_eleves    = QPushButton("Eleves")
+        self.btn_eleves    = QPushButton("Élèves")
         self.btn_paiement  = QPushButton("Paiements")
-        self.btn_recus     = QPushButton("Recus")
-        self.btn_param     = QPushButton("Parametres")
+        self.btn_recus     = QPushButton("Reçus")
+        self.btn_param     = QPushButton("Paramètres")
 
         for b in [self.btn_dashboard, self.btn_eleves, self.btn_paiement,
                   self.btn_recus, self.btn_param]:
