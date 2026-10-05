@@ -106,10 +106,13 @@ class MainWindow(QMainWindow):
         vbox = QVBoxLayout(sidebar)
         vbox.setContentsMargins(0, 0, 0, 0)
         vbox.setSpacing(0)
-
-        logo = QLabel("EduPaie")
+        logo = QLabel("EDUPAIE")
         logo.setObjectName("Logo")
         vbox.addWidget(logo)
+
+        sous_titre = QLabel("GESTION SCOLAIRE")
+        sous_titre.setObjectName("Subtitle")
+        vbox.addWidget(sous_titre)
 
         self.btn_dashboard = QPushButton("Tableau de bord")
         self.btn_eleves    = QPushButton("Eleves")
