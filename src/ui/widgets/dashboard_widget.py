@@ -21,8 +21,7 @@ class CarteStat(QFrame):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(16, 12, 16, 12)
         layout.setSpacing(4)
-
-        self.label_titre = QLabel(icone + "  " + titre.upper())
+        self.label_titre = QLabel(titre.upper())
         self.label_titre.setObjectName("CardTitle")
         layout.addWidget(self.label_titre)
 
