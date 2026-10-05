@@ -63,7 +63,7 @@ Python 3.10+ / PySide6 (Qt 6) / SQLite / reportlab / PyInstaller
 
 ## Auteur
 
-Françoise - Projet Developpeur web et web mobile (2018)
+Françoise - Projet Developpeur web et web mobile (2026)
 
 ## Licence
 
