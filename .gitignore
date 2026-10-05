@@ -28,3 +28,7 @@ distribution/
 backups/
 *.db.old
 *.bak
+*.db.sauvegarde
+*.db.backup
+*_PRE_MIGRATION.db
+*_AVANT_B.db
