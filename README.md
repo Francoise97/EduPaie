@@ -1,5 +1,11 @@
 # EduPaie - Gestion des paiements scolaires
 
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![PySide6](https://img.shields.io/badge/PySide6-6.11-green)
+![SQLite](https://img.shields.io/badge/SQLite-3.x-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+
 Application desktop pour gerer les paiements des eleves : enregistrement,
 calcul du solde restant du et generation de recus PDF numerotes.
 
