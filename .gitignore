@@ -18,7 +18,8 @@ dist/
 *.spec
 
 # Recus PDF generes
-recus/
+recus/*
+!recus/.gitkeep
 
 # OS
 .DS_Store
