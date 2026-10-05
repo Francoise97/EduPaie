@@ -1,8 +1,8 @@
-"""Fiche eleve avec historique des paiements."""
+"""Fiche detaillee d'un eleve avec historique des paiements."""
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QFrame,
     QPushButton, QTableWidget, QTableWidgetItem, QHeaderView,
-    QAbstractItemView, QMessageBox, QFormLayout
+    QAbstractItemView, QMessageBox, QFormLayout, QComboBox
 )
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QColor
@@ -11,9 +11,12 @@ from src.services.eleve_service import EleveService
 from src.services.paiement_service import PaiementService
 from src.utils.formatters import formater_montant, formater_date, libelle_statut
 from src.ui.dialogs.paiement_dialog import PaiementDialog
+from src.ui.dialogs.recu_dialog import RecuDialog
 
 
 class FicheEleveWidget(QWidget):
+    """Fiche complete d'un eleve : infos, situation, historique."""
+
     retour_demande = Signal()
     paiement_enregistre = Signal()
 
@@ -29,6 +32,7 @@ class FicheEleveWidget(QWidget):
         layout.setContentsMargins(20, 20, 20, 20)
         layout.setSpacing(14)
 
+        # --- Ligne du haut : retour + bouton paiement ---
         haut = QHBoxLayout()
 
         btn_retour = QPushButton("<  Retour a la liste")
@@ -47,16 +51,19 @@ class FicheEleveWidget(QWidget):
 
         layout.addLayout(haut)
 
+        # --- Titre ---
         self.titre = QLabel("Fiche eleve")
         self.titre.setObjectName("Title")
         layout.addWidget(self.titre)
 
+        # --- Bloc infos ---
         self.frame_infos = QFrame()
         self.frame_infos.setObjectName("Card")
         self.infos_layout = QFormLayout(self.frame_infos)
         self.infos_layout.setContentsMargins(16, 12, 16, 12)
         layout.addWidget(self.frame_infos)
 
+        # --- Situation financiere ---
         self.frame_situation = QFrame()
         self.frame_situation.setObjectName("Card")
         sit_layout = QVBoxLayout(self.frame_situation)
@@ -67,22 +74,26 @@ class FicheEleveWidget(QWidget):
         sit_layout.addWidget(self.lbl_situation)
         layout.addWidget(self.frame_situation)
 
+        # --- Titre historique ---
         titre2 = QLabel("Historique des paiements")
         titre2.setObjectName("Title")
         titre2.setStyleSheet("font-size: 16px;")
         layout.addWidget(titre2)
 
+        # --- Tableau historique (7 colonnes) ---
         self.table = QTableWidget()
         self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels([
-            "Recu N", "Date", "Montant", "Mode", "Solde apres",
-            "Reference", "Observation"
+            "Recu N", "Date", "Montant", "Mode",
+            "Solde apres", "Reference", "Observation"
         ])
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table.setSelectionMode(QAbstractItemView.SingleSelection)
         self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.table.verticalHeader().setVisible(False)
         self.table.setAlternatingRowColors(True)
         self.table.setMinimumHeight(200)
+        self.table.doubleClicked.connect(lambda _idx: self._voir_recu_selectionne())
 
         h = self.table.horizontalHeader()
         h.setSectionResizeMode(0, QHeaderView.ResizeToContents)
@@ -95,6 +106,7 @@ class FicheEleveWidget(QWidget):
 
         layout.addWidget(self.table, 1)
 
+        # --- Message si vide ---
         self.lbl_vide = QLabel("Aucun paiement enregistre pour cet eleve.")
         self.lbl_vide.setAlignment(Qt.AlignCenter)
         self.lbl_vide.setStyleSheet(
@@ -102,6 +114,23 @@ class FicheEleveWidget(QWidget):
         )
         layout.addWidget(self.lbl_vide)
         self.lbl_vide.setVisible(False)
+
+        # --- Boutons bas ---
+        actions = QHBoxLayout()
+        actions.addStretch()
+
+        self.btn_voir_recu = QPushButton("Voir le recu selectionne")
+        self.btn_voir_recu.setObjectName("Secondary")
+        self.btn_voir_recu.clicked.connect(self._voir_recu_selectionne)
+        actions.addWidget(self.btn_voir_recu)
+
+        self.btn_annuler = QPushButton("Annuler le paiement")
+        self.btn_annuler.setObjectName("Danger")
+        self.btn_annuler.setMinimumWidth(200)
+        self.btn_annuler.clicked.connect(self._annuler_paiement)
+        actions.addWidget(self.btn_annuler)
+
+        layout.addLayout(actions)
 
     def charger_eleve(self, eleve_id):
         self.eleve = self.eleve_service.obtenir(eleve_id)
@@ -111,6 +140,7 @@ class FicheEleveWidget(QWidget):
 
         self.titre.setText("Fiche de " + self.eleve.nom_complet)
 
+        # Infos
         while self.infos_layout.rowCount() > 0:
             self.infos_layout.removeRow(0)
 
@@ -121,6 +151,7 @@ class FicheEleveWidget(QWidget):
         self.infos_layout.addRow("Telephone :", QLabel(self.eleve.telephone or "-"))
         self.infos_layout.addRow("Parent :", QLabel(self.eleve.nom_parent or "-"))
 
+        # Situation financiere
         self.lbl_situation.setText(
             "<b>Total du :</b> " + formater_montant(self.eleve.frais_totaux) + "<br>"
             "<b>Total paye :</b> " + formater_montant(self.eleve.total_paye) + "<br>"
@@ -130,6 +161,7 @@ class FicheEleveWidget(QWidget):
             "<b>Statut :</b> " + libelle_statut(self.eleve.statut)
         )
 
+        # Bouton paiement
         if self.eleve.est_solde:
             self.btn_paiement.setEnabled(False)
             self.btn_paiement.setText("Deja solde")
@@ -137,15 +169,20 @@ class FicheEleveWidget(QWidget):
             self.btn_paiement.setEnabled(True)
             self.btn_paiement.setText("Enregistrer un paiement")
 
+        # Historique
         paiements = self.paiement_service.lister_par_eleve(self.eleve.id)
         self.table.setRowCount(len(paiements))
 
         if len(paiements) == 0:
             self.lbl_vide.setVisible(True)
             self.table.setVisible(False)
+            self.btn_voir_recu.setEnabled(False)
+            self.btn_annuler.setEnabled(False)
         else:
             self.lbl_vide.setVisible(False)
             self.table.setVisible(True)
+            self.btn_voir_recu.setEnabled(True)
+            self.btn_annuler.setEnabled(True)
 
         for row, p in enumerate(paiements):
             valeurs = [
@@ -159,15 +196,168 @@ class FicheEleveWidget(QWidget):
             ]
             for col, val in enumerate(valeurs):
                 item = QTableWidgetItem(val)
-                if col not in (5, 6):
+                if col != 6:
                     item.setTextAlignment(Qt.AlignCenter)
                 if col == 2:
                     item.setForeground(QColor("#10B981"))
                 if col == 0:
                     item.setForeground(QColor("#1E3A8A"))
-                if col == 0:
                     item.setData(Qt.UserRole, p.recu_id)
                 self.table.setItem(row, col, item)
+
+    def _voir_recu_selectionne(self):
+        row = self.table.currentRow()
+        if row < 0:
+            QMessageBox.warning(self, "Aucune selection",
+                                "Selectionne un paiement dans l'historique.")
+            return
+        item = self.table.item(row, 0)
+        if not item:
+            return
+        recu_id = item.data(Qt.UserRole)
+        if recu_id:
+            dialog = RecuDialog(self, recu_id=recu_id)
+            dialog.exec()
+
+    def _annuler_paiement(self):
+        """Annule un paiement apres confirmation avec raison."""
+        row = self.table.currentRow()
+        if row < 0:
+            QMessageBox.warning(self, "Aucune selection",
+                                "Selectionne d'abord un paiement dans l'historique.")
+            return
+
+        item = self.table.item(row, 0)
+        if not item:
+            return
+        recu_id = item.data(Qt.UserRole)
+        if not recu_id:
+            return
+
+        # Recuperer les infos du paiement
+        numero_recu = item.text()
+        montant_item = self.table.item(row, 2)
+        montant = montant_item.text() if montant_item else ""
+        date_item = self.table.item(row, 1)
+        date_p = date_item.text() if date_item else ""
+
+        # Dialogue de confirmation personnalise
+        from PySide6.QtWidgets import QDialog, QVBoxLayout as _VBox
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Annuler un paiement")
+        dialog.setMinimumWidth(450)
+
+        vbox = _VBox(dialog)
+        vbox.setContentsMargins(20, 20, 20, 20)
+        vbox.setSpacing(12)
+
+        # Titre
+        titre = QLabel("Confirmer l'annulation")
+        titre.setStyleSheet(
+            "font-size: 18px; font-weight: bold; color: #EF4444;"
+        )
+        vbox.addWidget(titre)
+
+        # Details
+        details = QLabel(
+            "<b>Eleve :</b> " + self.eleve.nom_complet + "<br>"
+            "<b>Recu N :</b> " + numero_recu + "<br>"
+            "<b>Date :</b> " + date_p + "<br>"
+            "<b>Montant :</b> " + montant
+        )
+        details.setStyleSheet(
+            "background-color: #F1F5F9; padding: 12px; "
+            "border-radius: 6px; font-size: 13px;"
+        )
+        vbox.addWidget(details)
+
+        # Raison
+        label_raison = QLabel("Raison de l'annulation :")
+        label_raison.setStyleSheet("font-weight: bold; margin-top: 8px;")
+        vbox.addWidget(label_raison)
+
+        combo = QComboBox()
+        combo.addItems([
+            "Faute de saisie",
+            "Erreur de montant",
+            "Doublon de paiement",
+            "Paiement non recu",
+            "Autre (preciser ci-dessous)"
+        ])
+        vbox.addWidget(combo)
+
+        # Commentaire
+        label_comm = QLabel("Commentaire (optionnel) :")
+        label_comm.setStyleSheet("font-weight: bold; margin-top: 8px;")
+        vbox.addWidget(label_comm)
+
+        from PySide6.QtWidgets import QLineEdit
+        commentaire = QLineEdit()
+        commentaire.setPlaceholderText("Details supplementaires...")
+        vbox.addWidget(commentaire)
+
+        # Avertissement
+        warn = QLabel(
+            "ATTENTION : Cette action est irreversible.\n"
+            "Le paiement et le recu associe seront supprimes."
+        )
+        warn.setStyleSheet(
+            "color: #991B1B; font-size: 12px; "
+            "background-color: #FEE2E2; padding: 10px; "
+            "border-radius: 6px; margin-top: 8px;"
+        )
+        vbox.addWidget(warn)
+
+        # Boutons
+        from PySide6.QtWidgets import QHBoxLayout as _HBox
+        boutons = _HBox()
+        boutons.addStretch()
+
+        btn_non = QPushButton("Non, annuler")
+        btn_non.setObjectName("Secondary")
+        btn_non.clicked.connect(dialog.reject)
+        boutons.addWidget(btn_non)
+
+        btn_oui = QPushButton("Oui, supprimer")
+        btn_oui.setObjectName("Danger")
+        btn_oui.clicked.connect(dialog.accept)
+        boutons.addWidget(btn_oui)
+
+        vbox.addLayout(boutons)
+
+        # Afficher
+        if dialog.exec() != QDialog.Accepted:
+            return
+
+        # Recuperer la raison
+        raison = combo.currentText()
+        comm = commentaire.text().strip()
+        if comm:
+            raison = raison + " - " + comm
+
+        # Trouver le paiement_id
+        paiement_id = None
+        for p in self.paiement_service.lister_par_eleve(self.eleve.id):
+            if p.recu_id == recu_id:
+                paiement_id = p.id
+                break
+
+        if not paiement_id:
+            QMessageBox.warning(self, "Erreur", "Paiement introuvable.")
+            return
+
+        # Supprimer
+        ok, msg = self.paiement_service.supprimer(paiement_id)
+        if ok:
+            QMessageBox.information(
+                self, "Succes",
+                "Paiement annule avec succes.\n\n"
+                "Raison : " + raison
+            )
+            self.charger_eleve(self.eleve.id)
+            self.paiement_enregistre.emit()
+        else:
+            QMessageBox.critical(self, "Erreur", msg)
 
     def _nouveau_paiement(self):
         if not self.eleve:
