@@ -1,0 +1,21 @@
+# Normalisation des fins de ligne
+* text=auto
+
+# Windows
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Python
+*.py text eol=lf
+*.py diff=python
+
+# Fichiers binaires
+*.png binary
+*.jpg binary
+*.pdf binary
+*.db binary
+*.exe binary
+
+# Linguist (eviter que Python soit masque)
+*.md linguist-documentation
+*.qss linguist-language=CSS
